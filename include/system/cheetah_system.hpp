@@ -71,11 +71,11 @@ class CheetahSystem {
         // flag check if time alreadt matched=
         bool matched_;
         //flag indicate lcm already recieve data 
-        bool updated_;
+        int updated_;
         //flag indicate imu message from rosbag already buffered.
         bool buffered_;
         // ros imu message buffer for time sync`
-        sensor_msgs::Imu imu_buffer_;
+        std::vector<sensor_msgs::Imu> imu_buffer_;
 };
 
 #endif // CHEETAHSYSTEM_H
