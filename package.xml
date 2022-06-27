@@ -16,9 +16,10 @@
     <depend>roscpp</depend>
     <depend>std_msgs</depend>
     <depend>sensor_msgs</depend>
-    <depend>inekf_msgs</depend>
+    <build_depend>inekf_msgs</build_depend>
     <depend>geometry_msgs</depend>
     <depend>tf</depend>
+    <exec_depend>inekf_msgs</exec_depend>
     <buildtool_depend>catkin</buildtool_depend>
 
     <!-- The export tag contains other, unspecified, tags -->
