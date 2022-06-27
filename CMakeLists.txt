@@ -60,7 +60,7 @@ if (LCM_FOUND)
     # add_subdirectory(src)
 endif (LCM_FOUND)
 message("LCM_INCLUDE_DIR: " ${LCM_INCLUDE_DIRS})
-
+include_directories(include ${catkin_INCLUDE_DIRS})
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
@@ -178,11 +178,12 @@ add_library(cheetah_measurement "${PROJECT_SOURCE_DIR}/src/utils/measurement.cpp
 add_library(utils "${PROJECT_SOURCE_DIR}/src/utils/utils.cpp")
 add_library(cheetah_state "${PROJECT_SOURCE_DIR}/src/system/cheetah_state.cpp")
 add_library(cheetah_system "${PROJECT_SOURCE_DIR}/src/system/cheetah_system.cpp")
+add_dependencies(cheetah_system ${catkin_EXPORTED_TARGETS})
 add_library(body_estimator "${PROJECT_SOURCE_DIR}/src/estimator/body_estimator.cpp")
 add_library(pose_publisher_node "${PROJECT_SOURCE_DIR}/src/pose_publisher_node.cpp")
 add_library(state_publisher_node "${PROJECT_SOURCE_DIR}/src/state_publisher_node.cpp")
-
-# target_link_libraries(state_publisher_node inekf_msgs)
+add_dependencies(state_publisher_node ${catkin_EXPORTED_TARGETS})
+#target_link_libraries(state_publisher_node inekf_msgs)
 target_link_libraries(cheetah_lcm_handler cheetah_kinematics_lcm ${LCM_LIBRARY})
 
 ## Add cmake target dependencies of the library
@@ -195,6 +196,7 @@ target_link_libraries(cheetah_lcm_handler cheetah_kinematics_lcm ${LCM_LIBRARY})
 ## The recommended prefix ensures that target names across packages don't collide
 
 add_executable(path_publisher_cheetah_node "${PROJECT_SOURCE_DIR}/src/path_publisher_cheetah_node.cpp")
+add_dependencies(path_publisher_cheetah_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(path_publisher_cheetah_node
     ${catkin_LIBRARIES}
     ${inekf_LIBRARIES}
@@ -202,6 +204,7 @@ target_link_libraries(path_publisher_cheetah_node
 )
 
 add_executable(cheetah_estimator src/cheetah_estimator.cpp )
+add_dependencies(cheetah_estimator ${catkin_EXPORTED_TARGETS})
 target_link_libraries(cheetah_estimator
     ${catkin_LIBRARIES}
     ${inekf_LIBRARIES}
